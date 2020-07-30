@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+
+        <!-- 구글폰트 -->
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+
+
+        <title>상품상세 및 구매</title>
+
+        <style>
+            .wrap {
+                margin: 10px auto;
+                width: 500px;
+                font-family: 'Nanum Gothic', sans-serif;
+
+            }
+
+            .pro_img {
+                width: 400px;
+                height: 400px;
+                background-image: url('https://courri.co.kr/web/product/big/201708/1159_shop1_192122.jpg');
+                background-position: auto;
+                background-size: cover;
+                border-radius: 10px;
+                padding-top: 50px;
+                display: block;
+                margin: 0px auto;
+            }
+
+            .pro_titile {
+                margin-top: 10px;
+            }
+
+            .order_form {
+                margin-top: 20px;
+            }
+
+            .order_title {
+                padding: 2%;
+            }
+
+            .order_button {
+                margin: 20px auto;
+                width: 50%;
+
+            }
+
+            /*.font1{*/
+            /*    font-family: 'Nanum Gothic', sans-serif;*/
+            /*}*/
+
+            /*.font2{*/
+            /*    !*font-family: 'Nanum Gothic', sans-serif;*!*/
+            /*}*/
+            /*.font3{*/
+            /*    !*font-family: 'Nanum Gothic', sans-serif;*!*/
+            /*}*/
+
+
+            /*table, th, td{*/
+            /*    border:1px solid;*/
+            /*}*/
+
+            table {
+                width: 100%;
+
+            }
+
+            .pro_width {
+                width: 40%;
+                padding: 2%;
+            }
+
+            .pro_text {
+                background-color: #F9FAFB;
+                height: 120%;
+                letter-spacing: -1px;
+                padding: 3%;
+                border-radius: 10px;
+                line-height: 170%;
+
+            }
+
+            .order_width {
+                width: 25%;
+            }
+
+            .title1 {
+                font-weight: bold;
+            }
+
+            .currency_col {
+                color: blue;
+            }
+
+
+        </style>
+
+
+        <script>
+
+            $(document).ready(function () {
+                $.ajax({
+                    type: "GET", // GET 방식으로 요청한다.
+                    url: "https://api.manana.kr/exchange/rate.json",
+                    data: {}, // 요청하면서 함께 줄 데이터 (GET 요청시엔 비워두세요)
+                    success: function (response) { // 서버에서 준 결과를 response라는 변수에 담음
+                        let mon = response[1]["rate"]
+                        let html = `달러-원 환율:${mon}`
+                        $("#currency_text").append(html)
+                    }
+
+                })
+            });
+
+
+            function order() {
+
+                // let name = $("#name").val();
+
+                if ($("#name").val() == "") {
+                    alert("이름을 입력해 주세요.")
+                }
+                else if ($("#sel option:selected").val() ==""){
+                    alert("수량을 선택해 주세요.")
+                } else if ($("#address").val() == "") {
+                     alert("주소를 입력해 주세요.")
+                } else if ($("#phone").val() == ""){
+                     alert("휴대폰번호를 입력해 주세요")
+                }
+
+
+
+            }
+
+
+        </script>
+
+    </head>
+    <body>
+
+
+        <!-- 테이블 만들기 연습 -->
+        <div class="wrap">
+            <div class="pro_img">
+            </div>
+
+            <div class="pro_titile">
+                <table>
+                    <thead>
+                        <tr>
+                            <td class="pro_width">
+                                <h4 class="title1">아린 플레어탑</h4>
+                            </td>
+                            <td>
+                                <h5 class="title1">94,000 KRW</h5>
+                            </td>
+                            <td>
+                                <h6 class="currency_col" id="currency_text"></h6>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="3" class="pro_text">
+                                미니멀함과 여성스러움을 겸비한 아린 플레어탑입니다.</br> 부드러운 쉬폰 안감으로 부드럽고 시원한 착용감을 선사하며 텐션이 없는 직물소재로 제작되어
+                                뒷콘솔지퍼로 오픈 클로징됩니다. 밑단플레어로 여성스러운 라인으로 완성되는 페미닌한 무드의 탑입니다. 데일리룩부터 특별한 날을 위한 드레시한 룩까지 다양한
+                                스타일링 가능한 아린 플레어탑과 SS시즌 다양한 스타일을 연출해보세요!
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+            <div class="order_form">
+                <table>
+                    <thead>
+                        <tr>
+                            <td colspan="2" class="order_title">
+                                <h3>주문하기</h3>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td class="order_width">주문자 성함:</td>
+                            <td>
+                                <input id="name" class="form-control" type="text" placeholder="이름">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>수량:</td>
+                            <td>
+                                <select id="sel" class="form-control">
+                                    <option selected value=""> 수량을 선택하세요 </option>
+                                    <option value="1">1개</option>
+                                    <option value="2">2개</option>
+                                    <option value="3">3개</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>주소:</td>
+                            <td>
+                                <input id="address" class="form-control" type="text" placeholder="주소">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>휴대폰번호:</td>
+                            <td>
+                                <input id="phone" class="form-control" type="text" placeholder="000-0000-0000">
+                            </td>
+                        </tr>
+
+                    </thead>
+
+                </table>
+
+                <div class="order_button">
+                    <button class="btn btn-primary btn-lg btn-block" onclick="order()" type="submit">주문하기</button>
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+</html>
